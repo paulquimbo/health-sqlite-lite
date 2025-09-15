@@ -6,24 +6,31 @@ DB_PATH = Path("clinic_simple.db")
 CSV_PATH = Path("data/patients.csv")
 
 def main():
-    # Loading CSV file into DataFrame
+    # Load CSV into DataFrame
     pat_df = pd.read_csv(CSV_PATH, dtype=str)
 
-    # Creating SQL database engine
+    # Create SQL database engine
     engine = create_engine(f"sqlite:///{DB_PATH}")
 
-    # Writing DataFrame to 'patients' table
-    # Need to change "append" to "replace" for testing purposes
-    pat_df.to_sql('patients', con=engine, if_exists="replace", index=False)
+    # Check for existing patient IDs to avoid duplicates
+    with engine.connect() as conn:
+        try:
+            existing_ids = pd.read_sql("SELECT patient_id FROM patients", conn)
+            pat_df = pat_df[~pat_df['patient_id'].isin(existing_ids['patient_id'])]
+        except Exception:
+            # Table doesn't exist yet — safe to insert all rows
+            pass
 
-    # Checking number of rows loaded
+    # Append only new rows to 'patients' table
+    pat_df.to_sql('patients', con=engine, if_exists="append", index=False)
+
+    # Count total rows in the table
     sql_count = text("SELECT COUNT(*) FROM patients")
     with engine.connect() as conn:
         result = conn.execute(sql_count)
         total = result.scalar()
 
-    print(f"Loaded {len(pat_df)} rows into patients. Table now has {total} rows")
+    print(f"Inserted {len(pat_df)} new rows into patients. Table now has {total} rows.")
 
 if __name__ == "__main__":
     main()
-
