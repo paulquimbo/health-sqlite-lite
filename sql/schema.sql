@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS patients;
 
--- need to replace date to text since sqlite does not have a date type
+-- need to replace DATE to TEXT since sqlite does not have a DATE type
 
 CREATE TABLE patients (
     patient_id TEXT PRIMARY KEY,        -- e.g. P00001
