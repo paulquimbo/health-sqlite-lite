@@ -17,8 +17,6 @@ import sqlite3
 
 from pathlib import Path
 
-sqlite3.connect('clinic_simple.db')
-
 # Convert string paths to Path objects
 DB_PATH = Path("./clinic_simple.db")
 CSV_PATH = Path("./data/patients.csv")
