@@ -48,7 +48,7 @@ SQLAlchemy
 ```
 
 ## `Analysis: SQLite verus Python Results Output`
-1. **Row Count**
+1. **Row Count** 
 ![SQLite Result](images/sql1.png)
 ![Python Result](images/py1.png)   
 2. **Top primary diagnoses by count**
