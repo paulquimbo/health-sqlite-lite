@@ -49,17 +49,26 @@ SQLAlchemy
 
 ## `Analysis: SQLite verus Python Results Output`
 1. **Row Count** 
+
 ![SQLite Result](images/sql1.png)
 ![Python Result](images/py1.png)   
+
 2. **Top primary diagnoses by count**
+
 ![SQLite Result](images/sql2.png)
 ![Python Result](images/py2.png)
+
 3. **Office-visit CPTs since Jan 1, 2025 (CPT codes starting with 992)**
+
 ![SQLite Result](images/sql3.png)
 ![Python Result](images/py3.png) 
+
 4. **Age (approx) at last visit for the 10 oldest patients**
+
 ![SQLite Result](images/sql4.png)
 ![Python Result](images/py4.png) 
+
 5. **Quick data quality check: any blank codes?**
+
 ![SQLite Result](images/sql5.png)
 ![Python Result](images/py5.png)
